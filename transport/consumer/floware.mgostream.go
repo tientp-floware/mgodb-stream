@@ -16,7 +16,7 @@ import (
 
 var (
 	tripstatus = []string{"fail", "cancel", "finished"}
-	dbtrip     = mgodb.NewSwitchMogoDB(config.Config.Mongodb.Database, db.Setting)
+	dbfloware  = mgodb.NewSwitchMogoDB(config.Config.Mongodb.Database, db.Setting)
 	//log        = logger.GetLogger("[Device service]")
 )
 
@@ -41,14 +41,17 @@ func NewMgoStream() *FlowareMgoStream {
 // FlowChangeStream stream consumer
 // We using to catch event from Trip
 func (mgstream *FlowareMgoStream) FlowChangeStream() *FlowareMgoStream {
+	log.Info("We run streaming....")
 	// Query and can use for scale up
 	// pipeline := nil
 	mgstream.Worker = make(map[string]DataRow)
 	// stream func to handle event
 	streamer := func(cs *mongo.ChangeStream) {
+
 		for cs.Next(context.Background()) {
 
 			changeDoc := new(model.Mgostream)
+
 			if err := cs.Decode(changeDoc); err != nil {
 				log.Info("err:", err)
 				break
@@ -56,11 +59,10 @@ func (mgstream *FlowareMgoStream) FlowChangeStream() *FlowareMgoStream {
 
 			setting := new(model.Setting)
 			changeDoc.ToStruct(setting)
-			log.Info("App event tracking code:", setting)
 		}
 	}
 
-	go dbtrip.ChangeStream(nil, streamer)
+	go dbfloware.ChangeStream(nil, streamer)
 
 	return mgstream
 }

@@ -11,11 +11,11 @@ mysql:
   debug: true
 
 mongodb:
-  host: localhost:27017
+  host: cluster0-shard-00-00-fpd2h.gcp.mongodb.net:27017,cluster0-shard-00-01-fpd2h.gcp.mongodb.net:27017,cluster0-shard-00-02-fpd2h.gcp.mongodb.net:27017
   database: flowareonline
   database_oit: iot
-  user: root
-  pass: 123123
+  user: floware
+  pass: floware2020
   
 encryption:
   oid_key: floware

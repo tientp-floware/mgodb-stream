@@ -2,6 +2,7 @@ package mgodb
 
 import (
 	"context"
+	"crypto/tls"
 	"encoding/json"
 	"fmt"
 
@@ -10,6 +11,7 @@ import (
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
+	"go.mongodb.org/mongo-driver/mongo/readpref"
 )
 
 var (
@@ -29,14 +31,19 @@ func init() {
 	usrpass = config.Config.Mongodb.Pass
 	dbname = config.Config.Mongodb.Database
 	host = config.Config.Mongodb.Host
-	fullconnectstring = fmt.Sprintf(`mongodb://%s:%s@%s/?authSource=admin`, usrname, usrpass, host)
+	fullconnectstring = fmt.Sprintf(`mongodb://%s:%s@%s/%s?retryWrites=true&w=majority&authSource=admin`, usrname, usrpass, host, dbname)
 	connection()
 }
 
 // connection for mongodb official
 func connection() {
+
 	opt := options.Client()
 	opt.ApplyURI(fullconnectstring)
+	opt.SetTLSConfig(&tls.Config{})
+	opt.SetMaxPoolSize(8)
+	opt.SetMinPoolSize(3)
+	opt.SetReadPreference(readpref.Nearest())
 	//opt.SetDirect(true)
 	err := opt.Validate()
 	// Connect to MongoDB
