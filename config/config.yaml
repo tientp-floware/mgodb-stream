@@ -1,0 +1,29 @@
+profiler:
+  prometheus: false
+  statsd_address: none
+  service: none
+
+mysql:
+  host: localhost
+  user: root
+  password: 123123
+  name_db: flowareonline
+  debug: true
+
+mongodb:
+  host: localhost
+  port: 27017
+  database: web_floware
+  database_oit: iot
+  user: root
+  pass: 123123
+  
+encryption:
+  oid_key: floware
+  jwt_secret: secret
+  jwt_exp: 72
+  jwt_pol: 59a795909e65177c27fcdd87
+
+partner:
+  url_devices: ''
+  url_metric_gps: ''
