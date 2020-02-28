@@ -20,6 +20,6 @@ func New(srv *repository.Service) *HTTP {
 //ByPlate handle get device by vehicle plate
 func (h *HTTP) ByPlate(c echo.Context) error {
 	qr := c.Param("q")
-	result := h.srv.Device.ByVehiclePlate(qr)
-	return c.JSON(200, result)
+	// result := h.srv.Device.ByVehiclePlate(qr)
+	return c.JSON(200, qr)
 }

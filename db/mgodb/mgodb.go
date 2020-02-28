@@ -2,20 +2,18 @@ package mgodb
 
 import (
 	"context"
-	"crypto/tls"
 	"encoding/json"
 	"fmt"
 
+	"github.com/labstack/gommon/log"
 	"github.com/tientp-floware/mgodb-stream/config"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
-	"go.mongodb.org/mongo-driver/mongo/readpref"
-	logger "go.uber.org/zap"
 )
 
 var (
-	log               = logger.GetLogger("DB - Driver")
+	//log               = zap.NewExample()
 	host              string
 	authdb            string
 	dbname            string
@@ -31,7 +29,7 @@ func init() {
 	usrpass = config.Config.Mongodb.Pass
 	dbname = config.Config.Mongodb.Database
 	host = config.Config.Mongodb.Host
-	fullconnectstring = fmt.Sprintf(`mongodb://%s:%s@%s/%s?retryWrites=true&w=majority&authSource=admin`, usrname, usrpass, host, authdb)
+	fullconnectstring = fmt.Sprintf(`mongodb://%s:%s@%s/?authSource=admin`, usrname, usrpass, host)
 	connection()
 }
 
@@ -39,10 +37,6 @@ func init() {
 func connection() {
 	opt := options.Client()
 	opt.ApplyURI(fullconnectstring)
-	opt.SetTLSConfig(&tls.Config{})
-	opt.SetMaxPoolSize(8)
-	opt.SetMinPoolSize(3)
-	opt.SetReadPreference(readpref.Nearest())
 	//opt.SetDirect(true)
 	err := opt.Validate()
 	// Connect to MongoDB

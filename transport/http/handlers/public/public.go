@@ -21,6 +21,5 @@ type (
 func New(srv *repository.Service) *Service {
 	return &Service{
 		Setting: setting.New(srv),
-		Trip:    trip.New(srv),
 	}
 }

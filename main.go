@@ -6,13 +6,9 @@ import (
 	"os/signal"
 	"time"
 
+	"github.com/labstack/gommon/log"
 	consumer "github.com/tientp-floware/mgodb-stream/transport/consumer"
 	transport "github.com/tientp-floware/mgodb-stream/transport/http"
-	logger "go.uber.org/zap"
-)
-
-var (
-	log = logger.GetLogger("[Gateway service]")
 )
 
 func main() {

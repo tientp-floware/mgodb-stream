@@ -6,18 +6,18 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 
+	log "github.com/labstack/gommon/log"
 	"github.com/tientp-floware/mgodb-stream/config"
 	"github.com/tientp-floware/mgodb-stream/db"
 	"github.com/tientp-floware/mgodb-stream/db/mgodb"
 	model "github.com/tientp-floware/mgodb-stream/models"
 	repository "github.com/tientp-floware/mgodb-stream/repositories"
-	logger "go.uber.org/zap"
 )
 
 var (
 	tripstatus = []string{"fail", "cancel", "finished"}
 	dbtrip     = mgodb.NewSwitchMogoDB(config.Config.Mongodb.Database, db.Setting)
-	log        = logger.GetLogger("[Device service]")
+	//log        = logger.GetLogger("[Device service]")
 )
 
 type (
@@ -42,7 +42,7 @@ func NewMgoStream() *FlowareMgoStream {
 // We using to catch event from Trip
 func (mgstream *FlowareMgoStream) FlowChangeStream() *FlowareMgoStream {
 	// Query and can use for scale up
-	pipeline := nil
+	// pipeline := nil
 	mgstream.Worker = make(map[string]DataRow)
 	// stream func to handle event
 	streamer := func(cs *mongo.ChangeStream) {
@@ -60,7 +60,7 @@ func (mgstream *FlowareMgoStream) FlowChangeStream() *FlowareMgoStream {
 		}
 	}
 
-	go dbtrip.ChangeStream(pipeline, streamer)
+	go dbtrip.ChangeStream(nil, streamer)
 
 	return mgstream
 }

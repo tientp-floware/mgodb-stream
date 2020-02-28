@@ -6,11 +6,6 @@ import (
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	"github.com/tientp-floware/mgodb-stream/transport/http/handlers/public"
-	logger "go.uber.org/zap"
-)
-
-var (
-	log = logger.GetLogger("Transport HTTP")
 )
 
 type (

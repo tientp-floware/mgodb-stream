@@ -1,9 +1,15 @@
 package model
 
+import (
+	"go.mongodb.org/mongo-driver/bson/primitive"
+)
+
 type (
 	// Setting collection
 	Setting struct {
-		TopNav []TopNav `json:"top_nav" bson:"top_nav"`
+		ID     primitive.ObjectID `bson:"_id"`
+		UserID int                `json:"user_id" bson:"user_id"`
+		TopNav []TopNav           `json:"top_nav" bson:"top_nav"`
 	}
 
 	// TopNav columns

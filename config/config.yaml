@@ -11,9 +11,8 @@ mysql:
   debug: true
 
 mongodb:
-  host: localhost
-  port: 27017
-  database: web_floware
+  host: localhost:27017
+  database: flowareonline
   database_oit: iot
   user: root
   pass: 123123

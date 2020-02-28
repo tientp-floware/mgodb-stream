@@ -8,6 +8,6 @@ import (
 // Route start route public
 func Route(e *echo.Echo) {
 	group := e.Group("/api/web")
-	srv := New(repository.New())
-	group.GET("user/setting/:q", srv.Device.ByPlate)
+	handle := New(repository.New())
+	group.GET("user/setting/:q", handle.Setting.ByPlate)
 }

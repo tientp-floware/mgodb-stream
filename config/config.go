@@ -42,7 +42,6 @@ type Schema struct {
 
 	Mongodb struct {
 		Host        string `mapstructure:"host"`
-		Port        int    `mapstructure:"port"`
 		Database    string `mapstructure:"database"`
 		DatabaseIOT string `mapstructure:"database_oit"`
 		User        string `mapstructure:"user"`
