@@ -11,7 +11,6 @@ import (
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
-	"go.mongodb.org/mongo-driver/mongo/readpref"
 )
 
 var (
@@ -41,9 +40,9 @@ func connection() {
 	opt := options.Client()
 	opt.ApplyURI(fullconnectstring)
 	opt.SetTLSConfig(&tls.Config{})
-	opt.SetMaxPoolSize(8)
-	opt.SetMinPoolSize(3)
-	opt.SetReadPreference(readpref.Nearest())
+	// opt.SetMaxPoolSize(8)
+	// opt.SetMinPoolSize(3)
+	//opt.SetReadPreference(readpref.Nearest())
 	//opt.SetDirect(true)
 	err := opt.Validate()
 	// Connect to MongoDB

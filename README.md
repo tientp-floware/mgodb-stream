@@ -4,6 +4,10 @@ We create this to do test lab.
 
 Our provide API via RESTful or via other methods.
 
+### Architecture
+
+![Architecture](./imgs/architecture.png)
+
 ### Prerequisites
 
 Golang version 1.13 above

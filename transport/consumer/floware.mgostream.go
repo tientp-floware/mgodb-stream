@@ -2,12 +2,13 @@ package transport
 
 import (
 	"context"
+	"fmt"
 
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 
+	"github.com/labstack/echo/v4"
 	log "github.com/labstack/gommon/log"
-	"github.com/tientp-floware/mgodb-stream/config"
 	"github.com/tientp-floware/mgodb-stream/db"
 	"github.com/tientp-floware/mgodb-stream/db/mgodb"
 	model "github.com/tientp-floware/mgodb-stream/models"
@@ -15,8 +16,8 @@ import (
 )
 
 var (
-	tripstatus = []string{"fail", "cancel", "finished"}
-	dbfloware  = mgodb.NewSwitchMogoDB(config.Config.Mongodb.Database, db.Setting)
+	tripstatus  = []string{"fail", "cancel", "finished"}
+	flowSetting = mgodb.NewMogoDB(db.Setting)
 	//log        = logger.GetLogger("[Device service]")
 )
 
@@ -43,7 +44,7 @@ func NewMgoStream() *FlowareMgoStream {
 func (mgstream *FlowareMgoStream) FlowChangeStream() *FlowareMgoStream {
 	log.Info("We run streaming....")
 	// Query and can use for scale up
-	// pipeline := nil
+	pipeline := []echo.Map{}
 	mgstream.Worker = make(map[string]DataRow)
 	// stream func to handle event
 	streamer := func(cs *mongo.ChangeStream) {
@@ -56,13 +57,13 @@ func (mgstream *FlowareMgoStream) FlowChangeStream() *FlowareMgoStream {
 				log.Info("err:", err)
 				break
 			}
-
+			fmt.Println("changeDoc:", changeDoc)
 			setting := new(model.Setting)
 			changeDoc.ToStruct(setting)
 		}
 	}
 
-	go dbfloware.ChangeStream(nil, streamer)
+	go flowSetting.ChangeStream(pipeline, streamer)
 
 	return mgstream
 }
