@@ -7,6 +7,7 @@ require (
 	github.com/go-redis/redis/v7 v7.2.0
 	github.com/golang/geo v0.0.0-20190916061304-5b978397cfec
 	github.com/google/uuid v1.1.1 // indirect
+	github.com/jinzhu/gorm v1.9.12
 	github.com/labstack/echo/v4 v4.1.14
 	github.com/labstack/gommon v0.3.0
 	github.com/manucorporat/try v0.0.0-20170609134256-2a0c6b941d52

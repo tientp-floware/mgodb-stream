@@ -8,10 +8,7 @@ import (
 type (
 	// Service instance
 	Service struct {
-		Setting Setting
-	}
-	// Setting list function can use
-	Setting interface {
+		Setting *setting.Setting
 	}
 )
 

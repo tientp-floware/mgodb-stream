@@ -7,7 +7,7 @@ import (
 	"github.com/go-redis/redis/v7"
 	"github.com/vmihailenco/msgpack/v4"
 
-	logger "g.ghn.vn/go-common/zap-logger"
+	logger "github.com/labstack/gommon/log"
 	cfg "github.com/tientp-floware/mgodb-stream/config"
 )
 

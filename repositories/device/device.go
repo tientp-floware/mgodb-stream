@@ -4,9 +4,9 @@ import (
 	"encoding/json"
 	"fmt"
 
-	logger "g.ghn.vn/go-common/zap-logger"
+	"github.com/labstack/gommon/log"
 	"github.com/tientp-floware/mgodb-stream/config"
-	db "github.com/tientp-floware/mgodb-stream/db/postgres"
+	db "github.com/tientp-floware/mgodb-stream/db/mysql"
 	"github.com/tientp-floware/mgodb-stream/lib/request"
 	model "github.com/tientp-floware/mgodb-stream/models"
 )
@@ -14,7 +14,6 @@ import (
 var (
 	urlDevices   = config.Config.Partner.URLDevices
 	urlMetricGPS = config.Config.Partner.URLMetricGPS
-	log          = logger.GetLogger("[Device service]")
 )
 
 func init() {

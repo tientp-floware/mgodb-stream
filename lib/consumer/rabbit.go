@@ -8,7 +8,7 @@ import (
 	"sync/atomic"
 	"time"
 
-	logger "g.ghn.vn/go-common/zap-logger"
+	logger "github.com/labstack/gommon/log"
 	"github.com/manucorporat/try"
 	"github.com/streadway/amqp"
 	"github.com/tientp-floware/mgodb-stream/config"

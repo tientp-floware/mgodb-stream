@@ -62,7 +62,7 @@ func (mgstream *FlowareMgoStream) FlowChangeStream() *FlowareMgoStream {
 
 			setting := new(model.Setting)
 			changeDoc.ToStruct(setting)
-
+			mgstream.createOrupdate(setting)
 			fmt.Println("setting:", setting)
 		}
 	}
@@ -70,4 +70,12 @@ func (mgstream *FlowareMgoStream) FlowChangeStream() *FlowareMgoStream {
 	go flowSetting.ChangeStream(pipeline, streamer)
 
 	return mgstream
+}
+
+func (mgstream *FlowareMgoStream) createOrupdate(data *model.Setting) {
+	data.String()
+	err := mgstream.repo.Setting.Crud.SQLCreate(data)
+	if err != nil {
+		fmt.Println("err:", err)
+	}
 }

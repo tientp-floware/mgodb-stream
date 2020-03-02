@@ -3,7 +3,7 @@ package repo
 import (
 	"sync"
 
-	db "github.com/tientp-floware/mgodb-stream/db/postgres"
+	db "github.com/tientp-floware/mgodb-stream/db/mysql"
 	"github.com/tientp-floware/mgodb-stream/lib/util"
 	model "github.com/tientp-floware/mgodb-stream/models"
 )
