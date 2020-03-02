@@ -57,9 +57,13 @@ func (mgstream *FlowareMgoStream) FlowChangeStream() *FlowareMgoStream {
 				log.Info("err:", err)
 				break
 			}
+
 			fmt.Println("changeDoc:", changeDoc)
+
 			setting := new(model.Setting)
 			changeDoc.ToStruct(setting)
+
+			fmt.Println("setting:", setting)
 		}
 	}
 

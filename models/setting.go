@@ -7,7 +7,7 @@ import (
 type (
 	// Setting collection
 	Setting struct {
-		ID     primitive.ObjectID `bson:"_id"`
+		ID     primitive.ObjectID `json:"_id" bson:"_id"`
 		UserID int                `json:"user_id" bson:"user_id"`
 		TopNav []TopNav           `json:"top_nav" bson:"top_nav"`
 	}
